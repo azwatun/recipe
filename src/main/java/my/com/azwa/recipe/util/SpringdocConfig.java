@@ -8,11 +8,13 @@ import io.swagger.v3.oas.models.info.Info;
 
 @Configuration
 public class SpringdocConfig {
+
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Your API Title")
-                        .description("Your API Description")
-                        .version("1.0.0"));
+                .info(new Info()
+                        .title("My API")
+                        .version("1.0")
+                        .description("API documentation for my Spring Boot app"));
     }
 }

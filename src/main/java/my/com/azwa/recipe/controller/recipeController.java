@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.com.azwa.recipe.dto.PaginationRequestDTO;
@@ -57,10 +54,6 @@ public class recipeController {
 
     /******* ec518575-3975-4dc3-8831-e2bd97f2c6d7 *******/
     @GetMapping("/")
-    @Operation(summary = "Get a greeting message")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful operation")
-    })
     public List<RecipeListDTO> getRecipeList(@RequestParam(required = false) Long recipeSeqno,
             @RequestParam(required = false) String recipeCode,
             @RequestParam(required = false) String recipeName,
@@ -239,7 +232,7 @@ public class recipeController {
      *         of the update operation.
      * @throws IOException If the image cannot be updated.
      */
-    @PostMapping("/saveImage/{recipeSeqno}")
+    @PostMapping("/image/save/{recipeSeqno}")
     public ResponseEntity<String> updateImage(@PathVariable Long recipeSeqno,
             @RequestParam("image") MultipartFile file, @RequestParam(required = false) Long userId) {
         try {
@@ -262,7 +255,7 @@ public class recipeController {
      * @return A ResponseEntity containing the image as a byte array, and a content
      *         type of image/jpeg.
      */
-    @GetMapping("/getImage/{recipeSeqno}")
+    @GetMapping("/image/{recipeSeqno}")
     public ResponseEntity<byte[]> getImage(@PathVariable Long recipeSeqno) {
         byte[] image = recipeService.getImageRecipe(recipeSeqno);
         if (image != null) {
